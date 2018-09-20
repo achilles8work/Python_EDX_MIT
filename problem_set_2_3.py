@@ -47,6 +47,7 @@ def minimum_payment(balance,annualInterestRate,monthlyInterestRate,minPay):
 loanAmount = float(input("Enter the amount: "))
 annualInterestRate = float(input("Enter the annual interest rate: "))
 IntialLoanAmount = loanAmount
+epsilon = 0.03
 
 monthlyInterestRate = annualInterestRate/12.0
 lowerBound = loanAmount/12.0
@@ -54,13 +55,13 @@ upperBound = (loanAmount * ((1.0 + monthlyInterestRate)**12))/12.0
 
 
 # Bisection Search loop
-while loanAmount > 0:
+while abs(loanAmount) > epsilon:
     minPay = (lowerBound + upperBound)/2
     loanAmount = IntialLoanAmount
     loanAmount = minimum_payment(loanAmount,annualInterestRate,monthlyInterestRate,minPay)
-    if loanAmount > 0:
+    if loanAmount > epsilon:
         lowerBound = minPay
-    elif loanAmount < 0:
+    elif loanAmount < -epsilon:
         upperBound = minPay
     else:
         break

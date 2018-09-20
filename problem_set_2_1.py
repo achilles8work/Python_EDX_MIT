@@ -22,11 +22,11 @@ So your program only prints out one thing: the remaining balance at the end of t
 Remaining balance: 4784.0
 '''
 #function to calculate credit card balance at the end of the year
-def balance_calculator(balance, annualInterestRate):
+def balance_calculator(balance, annualInterestRate, monthlyPaymentRate):
     monthlyInterestRate = annualInterestRate/12.0
 
     for month in range(12):
-        monthlyPayment = monthlyInterestRate * balance
+        monthlyPayment = monthlyPaymentRate * balance
         balance = balance - monthlyPayment
         balance += monthlyInterestRate * balance
 
@@ -34,7 +34,8 @@ def balance_calculator(balance, annualInterestRate):
 
 loanAmount = float(input("Enter the amount: "))
 annualInterestRate = float(input("Enter the anual interest rate: "))
+monthlyPaymentRate = float(input("Enter the monthly payment rate: "))
 
-remainingAmount = round(balance_calculator(loanAmount,annualInterestRate),2)
+remainingAmount = round(balance_calculator(loanAmount,annualInterestRate,monthlyPaymentRate),2)
 
 print("Remaining amount at year end:",remainingAmount)
